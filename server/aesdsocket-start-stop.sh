@@ -15,7 +15,7 @@ DAEMON_NAME="aesdsocket"
 case "$1" in
     start)
         echo "Start server in daemon mode..."
-        if pgrep -x $DAEMON_NAME > /dev/null; then
+        if grep -x $DAEMON_NAME > /dev/null; then
         	echo "Error: aesdsocket is already launched !"
         	exit 1
         fi
@@ -24,7 +24,7 @@ case "$1" in
         ;;
     stop)    
         echo "Stop server..."
-        if ! pgrep -x $DAEMON_NAME > /dev/null; then
+        if ! grep -x $DAEMON_NAME > /dev/null; then
 		echo "Error: aesdsocket is not launched !"
 		exit 1
         fi
@@ -38,8 +38,8 @@ case "$1" in
         $0 start
         ;;
     status)
-        if pgrep -x $DAEMON_NAME > /dev/null; then
-            echo "aesdsocket est actif (PID : $(pgrep -x $DAEMON_NAME))"
+        if grep -x $DAEMON_NAME > /dev/null; then
+            echo "aesdsocket est actif (PID : $(grep -x $DAEMON_NAME))"
         else
             echo "aesdsocket est inactif"
         fi

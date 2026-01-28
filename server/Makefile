@@ -3,7 +3,7 @@
 
 # Name of the Exe
 TARGET = aesdsocket
-
+ 
 # Sources (ajoutez d'autres fichiers .c ici si besoin)
 SRC = aesdsocket.c
 OBJ = $(SRC:.c=.o)  # Génère les noms de fichiers objets automatiquement

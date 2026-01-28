@@ -1,22 +1,11 @@
 ##############################################################
 #
 # AESD-ASSIGNMENTS
-# 
+# modification: 27DEC2025, by Arnaud SIMO
+# Works for builds root and qemu: 30DEC2025
 ##############################################################
 
-#TODO: Fill up the contents below in order to reference your assignment 3 git contents
-AESD_ASSIGNMENTS_VERSION = 2a2175b5907adff9b352dc09618a5e40ad20c6e6
-# Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
-# with ssh keys and the automated build/test system.
-# Your site should start with git@github.com:
-
-AESD_ASSIGNMENTS_SITE = git@github.com:cu-ecen-aeld/assignments-3-and-later-simo-2021.git
-AESD_ASSIGNMENTS_SITE_METHOD = git
-AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
-
-
-
-AESD_ASSIGNMENTS_VERSION = 7e3a2132e731ecc51945a879bc9da2d87ad3c852
+AESD_ASSIGNMENTS_VERSION = 429138b #a83f102 
 AESD_ASSIGNMENTS_SITE = git@github.com:cu-ecen-aeld/assignments-3-and-later-simo-2021.git
 AESD_ASSIGNMENTS_SITE_METHOD = git
 AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
@@ -30,8 +19,18 @@ define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
 	$(INSTALL) -d -m 0755 $(TARGET_DIR)/etc/finder-app/conf
 	$(INSTALL) -m 0644 $(@D)/finder-app/conf/* $(TARGET_DIR)/etc/finder-app/conf/
 
-	# Binaire writer
+	# Binaire writer (and aesdsocket)
 	$(INSTALL) -m 0755 $(@D)/finder-app/writer $(TARGET_DIR)/usr/bin/
+	$(INSTALL) -m 0755 $(@D)/finder-app/writer $(TARGET_DIR)/etc/finder-app/
+
+    	$(INSTALL) -m 0755 $(@D)/server/aesdsocket  $(TARGET_DIR)/usr/bin/
+	
+   	# Installer le script finder-test.sh et finder.sh (and aesdsocket-start-stop 
+    	$(INSTALL) -m 0755 $(@D)/finder-app/finder-test.sh $(TARGET_DIR)/usr/bin/
+    	$(INSTALL) -m 0755 $(@D)/finder-app/finder.sh $(TARGET_DIR)/usr/bin/
+    	
+    	$(INSTALL) -m 0755 $(@D)/server/aesdsocket-start-stop.sh  $(TARGET_DIR)/etc/init.d/S99aesdsocket
+    	$(INSTALL) -m 0755 $(@D)/server/aesdsocket-start-stop  $(TARGET_DIR)/etc/init.d/S99aesdsocket_
 endef
 
 $(eval $(generic-package))
