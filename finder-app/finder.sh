@@ -17,8 +17,11 @@ NUMLINES=10
 # Check argument count
 if [ $# -lt 2 ]  
 then	
-	echo "Error::search string and file directory are missing."
-	echo "      ./finder.sh  /dir1/subdir1/  stringToSearch"
+	echo "Error: search string and file directory are missing."
+	echo "Total number of arguments should be."
+	echo "The order of the arguments should be:  ./finder.sh  /dir1/subdir1/  stringToSearch"
+	echo "where:  /dir1/subdir1/ is the File Directory Path"
+	echo "and:   stringToSearch String to be search in the path."
 	exit 1
 fi
 

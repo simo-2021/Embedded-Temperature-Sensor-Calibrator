@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 	if (fp == NULL){
 		syslog(LOG_ERR, "Error while writing on file: %s", filename);		
 		closelog();
-		return 1;
+		return  1;
 	}
 	
 	syslog(LOG_DEBUG, "Fichier %s ouvert avec succès.", filename);
