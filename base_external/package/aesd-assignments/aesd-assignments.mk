@@ -5,13 +5,14 @@
 # Works for builds root and qemu: 30DEC2025
 ##############################################################
 
-AESD_ASSIGNMENTS_VERSION = 429138b #a83f102 
-AESD_ASSIGNMENTS_SITE = git@github.com:cu-ecen-aeld/assignments-3-and-later-simo-2021.git
+AESD_ASSIGNMENTS_VERSION = 83cee2a33c76d3569081bd50db830730721e88e1  #83cee2a 
+AESD_ASSIGNMENTS_SITE =  git@github.com:simo-2021/Embedded-Temperature-Sensor-Calibrator.git
 AESD_ASSIGNMENTS_SITE_METHOD = git
 AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
 
 define AESD_ASSIGNMENTS_BUILD_CMDS
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app all
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app  all
+	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/server  all
 endef
 
 define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
@@ -30,7 +31,15 @@ define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
     	$(INSTALL) -m 0755 $(@D)/finder-app/finder.sh $(TARGET_DIR)/usr/bin/
     	
     	$(INSTALL) -m 0755 $(@D)/server/aesdsocket-start-stop.sh  $(TARGET_DIR)/etc/init.d/S99aesdsocket
-    	$(INSTALL) -m 0755 $(@D)/server/aesdsocket-start-stop  $(TARGET_DIR)/etc/init.d/S99aesdsocket_
+    	    	
+    	# Installer capteur température
+	$(INSTALL) -m 0755 $(@D)/server/temp_sensor $(TARGET_DIR)/usr/bin/
+
+	# Installer service TCP
+	$(INSTALL) -m 0755 $(@D)/server/temp_server $(TARGET_DIR)/usr/bin/
+
+	# Installer script de démarrage (S98 : avant aesdsocket)
+	$(INSTALL) -m 0755 $(@D)/script/temp_service-start-stop.sh $(TARGET_DIR)/etc/init.d/S98temp_service
 endef
 
 $(eval $(generic-package))
