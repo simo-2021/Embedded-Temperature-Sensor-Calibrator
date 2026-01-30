@@ -4,7 +4,7 @@
 
 // Calibration parameters (ton résultat : ±0.37% error)
 #define CALIB_FACTOR 0.987
-#define CALIB_OFFSET 1.23
+#define CALIB_OFFSET 1.24
 
 // Simule une valeur brute du capteur (erreur ±8%)
 float get_raw_temperature() {
